@@ -6,11 +6,24 @@
  * Veritabanı bilgileri üretim ortamında güvenli bir şekilde saklanmalıdır.
  */
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'u644550780_halisaha');
-define('DB_USER', 'u644550780_halisaha1');
-define('DB_PASS', 'Subasi_Enes63');
-define('DB_CHARSET', 'utf8mb4');
+// Ortam degiskenlerinden veritabani bilgilerini oku
+$envHost    = getenv('DB_HOST') ?: 'localhost';
+$envName    = getenv('DB_NAME');
+$envUser    = getenv('DB_USER');
+$envPass    = getenv('DB_PASS');
+$envCharset = getenv('DB_CHARSET') ?: 'utf8mb4';
+
+// Gerekli degiskenler tanimli degilse hata ver
+if ($envName === false || $envUser === false || $envPass === false) {
+    die('Database environment variables (DB_NAME, DB_USER, DB_PASS) must be set.');
+}
+
+// Mevcut kodla uyum icin sabitleri tanimla
+define('DB_HOST', $envHost);
+define('DB_NAME', $envName);
+define('DB_USER', $envUser);
+define('DB_PASS', $envPass);
+define('DB_CHARSET', $envCharset);
 
 try {
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
