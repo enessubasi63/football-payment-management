@@ -124,8 +124,16 @@ Experience the **football Payment Management System** firsthand through our live
 
 4. **Configure the Environment:**
 
-   - Duplicate the `.env.example` file and rename it to `.env`.
-   - Update the environment variables with your database credentials and other necessary configurations.
+   - Copy `config/db.example.php` to `config/db.php` as a reference.
+   - Set the following environment variables with your database credentials:
+
+     ```bash
+     export DB_HOST=localhost      # optional, defaults to localhost
+     export DB_NAME=football_db
+     export DB_USER=yourusername
+     export DB_PASS=yourpassword
+     export DB_CHARSET=utf8mb4     # optional
+     ```
 
 5. **Set Up Permissions:**
 
@@ -160,21 +168,16 @@ Experience the **football Payment Management System** firsthand through our live
    mysql -u yourusername -p football_db < database/schema.sql
    ```
 
-3. **Update Configuration Files:**
+3. **Set Database Variables:**
 
-   Ensure that your `config/db.php` (or equivalent) file has the correct database credentials.
+   Define your database connection details using environment variables before running the application:
 
-   ```php
-   <?php
-   // config/db.php
-
-   return [
-       'host' => 'localhost',
-       'dbname' => 'football_db',
-       'user' => 'yourusername',
-       'password' => 'yourpassword',
-       'charset' => 'utf8mb4',
-   ];
+   ```bash
+   DB_HOST=localhost
+   DB_NAME=football_db
+   DB_USER=yourusername
+   DB_PASS=yourpassword
+   DB_CHARSET=utf8mb4
    ```
    
 ### Email Configuration (Optional)
